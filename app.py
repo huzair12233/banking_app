@@ -16,7 +16,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(bank_bp)
 
-    # Static
+    # Static route
     @app.route('/static/<path:filename>')
     def custom_static(filename):
         from flask import send_from_directory
@@ -24,6 +24,9 @@ def create_app():
 
     return app
 
+# Create the app instance globally (for Gunicorn)
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
+    # This is only for local dev using Flask's built-in server
     app.run(debug=True)
