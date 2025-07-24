@@ -85,7 +85,7 @@ def account_list(payload):
 @login_required(role='banker')  # restrict to banker role only
 def all_transactions(payload):
     txns = list(get_collection('transactions').find())
-    return render_template('transactions.html', txns=txns, all=True, user=user)
+    return render_template('transactions.html', txns=txns, all=True)
 
 @bank_bp.route('/check-balance')
 @login_required(role='customer')
