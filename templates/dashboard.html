@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Balance: ₹ {{ user.balance }}</p>
+
+<form method="post" action="{{ url_for('bank.deposit') }}">
+  <label>Deposit: <input type="number" name="amount" step="0.01" min="1"></label>
+  <button type="submit">Deposit</button>
+</form>
+<form method="post" action="{{ url_for('bank.withdraw') }}">
+  <label>Withdraw: <input type="number" name="amount" step="0.01" min="1"></label>
+  <button type="submit">Withdraw</button>
+</form>
+<a href="{{ url_for('bank.transactions') }}">View Transactions</a>
+{% if user.role == 'banker' %}
+  <p><a href="{{ url_for('bank.account_list') }}">View All Accounts</a></p>
+  <p><a href="{{ url_for('bank.all_transactions') }}">All Transactions</a></p>
+{% endif %}
+{% endblock %}

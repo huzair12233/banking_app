@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<h2>All Customer Accounts</h2>
+<table>
+    <tr><th>Username</th><th>Email</th><th>Balance</th></tr>
+    {% for user in users %}
+      <tr>
+        <td>{{ user['username'] }}</td>
+        <td>{{ user['email'] }}</td>
+        <td>₹ {{ user['balance'] }}</td>
+      </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

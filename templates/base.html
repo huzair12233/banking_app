@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ title if title else "Banking System" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('bank.dashboard') }}">Dashboard</a>
+    {% if user %}
+        {% if user.role == 'customer' %}
+            <a href="{{ url_for('bank.transactions') }}">My Transactions</a>
+            <a href="{{ url_for('bank.check_balance') }}">Check Balance</a>
+        {% elif user.role == 'banker' %}
+            <a href="{{ url_for('bank.account_list') }}">Accounts</a>
+            <a href="{{ url_for('bank.all_transactions') }}">All Transactions</a>
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Logout ({{ user.username }})</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}">Login</a>
+        <a href="{{ url_for('auth.register') }}">Register</a>
+    {% endif %}
+</nav>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul id="messages">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

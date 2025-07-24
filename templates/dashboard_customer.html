@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Welcome, {{ user.username }} (Customer)</h2>
+  <div style="background:#e9faf3; border-left:5px solid #52b788; padding:1em 2em; margin: 1.2em 0; border-radius:8px; font-size:1.2em; font-weight:500;">
+    Current Balance: <strong>₹ {{ user.balance }}</strong>
+  </div>
+
+  <form method="post" action="{{ url_for('bank.deposit') }}">
+    <label>Deposit Amount: <input type="number" name="amount" step="0.01" min="1" required></label>
+    <button type="submit">Deposit</button>
+  </form>
+
+  <form method="post" action="{{ url_for('bank.withdraw') }}">
+    <label>Withdraw Amount: <input type="number" name="amount" step="0.01" min="1" required></label>
+    <button type="submit">Withdraw</button>
+  </form>
+  {% if withdraw_error %}
+    <div style="color:#d7263d; margin-top:.5em;"><strong>{{ withdraw_error }}</strong></div>
+  {% endif %}
+  
+
+  <p style="margin-top:1.5em;"><a href="{{ url_for('bank.transactions') }}">View Your Transactions</a></p>
+</div>
+{% endblock %}
+

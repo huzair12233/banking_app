@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="text-align:center;">
+  <h2>Account Balance</h2>
+  <div style="display:inline-block; background:#e9faf3; border-left:6px solid #52b788; padding:1.6em 3em; border-radius:12px; font-size:1.4em; margin-top:1em;">
+    ₹ <strong>{{ user.balance }}</strong>
+  </div>
+</div>
+{% endblock %}
